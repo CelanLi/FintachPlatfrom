@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.celan.dataservice.mapper.ProductInfoMapper">
+  <resultMap id="BaseResultMap" type="com.celan.api.model.ProductInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="rate" jdbcType="DECIMAL" property="rate" />
+    <result column="cycle" jdbcType="BIGINT" property="cycle" />
+    <result column="release_time" jdbcType="DATE" property="releaseTime" />
+    <result column="product_type" jdbcType="BIGINT" property="productType" />
+    <result column="product_no" jdbcType="VARCHAR" property="productNo" />
+    <result column="product_money" jdbcType="DECIMAL" property="productMoney" />
+    <result column="left_product_money" jdbcType="DECIMAL" property="leftProductMoney" />
+    <result column="bid_min_limit" jdbcType="DECIMAL" property="bidMinLimit" />
+    <result column="bit_max_limit" jdbcType="DECIMAL" property="bitMaxLimit" />
+    <result column="product_status" jdbcType="BIGINT" property="productStatus" />
+    <result column="product_full_time" jdbcType="TIMESTAMP" property="productFullTime" />
+    <result column="product_desc" jdbcType="VARCHAR" property="productDesc" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, product_name, rate, cycle, release_time, product_type, product_no, product_money, 
+    left_product_money, bid_min_limit, bit_max_limit, product_status, product_full_time, 
+    product_desc, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_product_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from b_product_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.celan.api.model.ProductInfo">
+    insert into b_product_info (id, product_name, rate, 
+      cycle, release_time, product_type, 
+      product_no, product_money, left_product_money, 
+      bid_min_limit, bit_max_limit, product_status, 
+      product_full_time, product_desc, version
+      )
+    values (#{id,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{rate,jdbcType=DECIMAL}, 
+      #{cycle,jdbcType=BIGINT}, #{releaseTime,jdbcType=DATE}, #{productType,jdbcType=BIGINT}, 
+      #{productNo,jdbcType=VARCHAR}, #{productMoney,jdbcType=DECIMAL}, #{leftProductMoney,jdbcType=DECIMAL}, 
+      #{bidMinLimit,jdbcType=DECIMAL}, #{bitMaxLimit,jdbcType=DECIMAL}, #{productStatus,jdbcType=BIGINT}, 
+      #{productFullTime,jdbcType=TIMESTAMP}, #{productDesc,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.celan.api.model.ProductInfo">
+    insert into b_product_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="cycle != null">
+        cycle,
+      </if>
+      <if test="releaseTime != null">
+        release_time,
+      </if>
+      <if test="productType != null">
+        product_type,
+      </if>
+      <if test="productNo != null">
+        product_no,
+      </if>
+      <if test="productMoney != null">
+        product_money,
+      </if>
+      <if test="leftProductMoney != null">
+        left_product_money,
+      </if>
+      <if test="bidMinLimit != null">
+        bid_min_limit,
+      </if>
+      <if test="bitMaxLimit != null">
+        bit_max_limit,
+      </if>
+      <if test="productStatus != null">
+        product_status,
+      </if>
+      <if test="productFullTime != null">
+        product_full_time,
+      </if>
+      <if test="productDesc != null">
+        product_desc,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="cycle != null">
+        #{cycle,jdbcType=BIGINT},
+      </if>
+      <if test="releaseTime != null">
+        #{releaseTime,jdbcType=DATE},
+      </if>
+      <if test="productType != null">
+        #{productType,jdbcType=BIGINT},
+      </if>
+      <if test="productNo != null">
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productMoney != null">
+        #{productMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="leftProductMoney != null">
+        #{leftProductMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="bidMinLimit != null">
+        #{bidMinLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="bitMaxLimit != null">
+        #{bitMaxLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="productStatus != null">
+        #{productStatus,jdbcType=BIGINT},
+      </if>
+      <if test="productFullTime != null">
+        #{productFullTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productDesc != null">
+        #{productDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.celan.api.model.ProductInfo">
+    update b_product_info
+    <set>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="cycle != null">
+        cycle = #{cycle,jdbcType=BIGINT},
+      </if>
+      <if test="releaseTime != null">
+        release_time = #{releaseTime,jdbcType=DATE},
+      </if>
+      <if test="productType != null">
+        product_type = #{productType,jdbcType=BIGINT},
+      </if>
+      <if test="productNo != null">
+        product_no = #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productMoney != null">
+        product_money = #{productMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="leftProductMoney != null">
+        left_product_money = #{leftProductMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="bidMinLimit != null">
+        bid_min_limit = #{bidMinLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="bitMaxLimit != null">
+        bit_max_limit = #{bitMaxLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="productStatus != null">
+        product_status = #{productStatus,jdbcType=BIGINT},
+      </if>
+      <if test="productFullTime != null">
+        product_full_time = #{productFullTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productDesc != null">
+        product_desc = #{productDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.celan.api.model.ProductInfo">
+    update b_product_info
+    set product_name = #{productName,jdbcType=VARCHAR},
+      rate = #{rate,jdbcType=DECIMAL},
+      cycle = #{cycle,jdbcType=BIGINT},
+      release_time = #{releaseTime,jdbcType=DATE},
+      product_type = #{productType,jdbcType=BIGINT},
+      product_no = #{productNo,jdbcType=VARCHAR},
+      product_money = #{productMoney,jdbcType=DECIMAL},
+      left_product_money = #{leftProductMoney,jdbcType=DECIMAL},
+      bid_min_limit = #{bidMinLimit,jdbcType=DECIMAL},
+      bit_max_limit = #{bitMaxLimit,jdbcType=DECIMAL},
+      product_status = #{productStatus,jdbcType=BIGINT},
+      product_full_time = #{productFullTime,jdbcType=TIMESTAMP},
+      product_desc = #{productDesc,jdbcType=VARCHAR},
+      version = #{version,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

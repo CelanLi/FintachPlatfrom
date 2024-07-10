@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.celan.dataservice.mapper.IncomeRecordMapper">
+  <resultMap id="BaseResultMap" type="com.celan.api.model.IncomeRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="prod_id" jdbcType="BIGINT" property="prodId" />
+    <result column="bid_id" jdbcType="BIGINT" property="bidId" />
+    <result column="bit_money" jdbcType="DECIMAL" property="bitMoney" />
+    <result column="income_date" jdbcType="DATE" property="incomeDate" />
+    <result column="income_money" jdbcType="DECIMAL" property="incomeMoney" />
+    <result column="income_status" jdbcType="BIGINT" property="incomeStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, prod_id, bid_id, bit_money, income_date, income_money, income_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_income_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from b_income_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.celan.api.model.IncomeRecord">
+    insert into b_income_record (id, uid, prod_id, 
+      bid_id, bit_money, income_date, 
+      income_money, income_status)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{prodId,jdbcType=BIGINT}, 
+      #{bidId,jdbcType=BIGINT}, #{bitMoney,jdbcType=DECIMAL}, #{incomeDate,jdbcType=DATE}, 
+      #{incomeMoney,jdbcType=DECIMAL}, #{incomeStatus,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.celan.api.model.IncomeRecord">
+    insert into b_income_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="prodId != null">
+        prod_id,
+      </if>
+      <if test="bidId != null">
+        bid_id,
+      </if>
+      <if test="bitMoney != null">
+        bit_money,
+      </if>
+      <if test="incomeDate != null">
+        income_date,
+      </if>
+      <if test="incomeMoney != null">
+        income_money,
+      </if>
+      <if test="incomeStatus != null">
+        income_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="prodId != null">
+        #{prodId,jdbcType=BIGINT},
+      </if>
+      <if test="bidId != null">
+        #{bidId,jdbcType=BIGINT},
+      </if>
+      <if test="bitMoney != null">
+        #{bitMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="incomeDate != null">
+        #{incomeDate,jdbcType=DATE},
+      </if>
+      <if test="incomeMoney != null">
+        #{incomeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="incomeStatus != null">
+        #{incomeStatus,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.celan.api.model.IncomeRecord">
+    update b_income_record
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="prodId != null">
+        prod_id = #{prodId,jdbcType=BIGINT},
+      </if>
+      <if test="bidId != null">
+        bid_id = #{bidId,jdbcType=BIGINT},
+      </if>
+      <if test="bitMoney != null">
+        bit_money = #{bitMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="incomeDate != null">
+        income_date = #{incomeDate,jdbcType=DATE},
+      </if>
+      <if test="incomeMoney != null">
+        income_money = #{incomeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="incomeStatus != null">
+        income_status = #{incomeStatus,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.celan.api.model.IncomeRecord">
+    update b_income_record
+    set uid = #{uid,jdbcType=BIGINT},
+      prod_id = #{prodId,jdbcType=BIGINT},
+      bid_id = #{bidId,jdbcType=BIGINT},
+      bit_money = #{bitMoney,jdbcType=DECIMAL},
+      income_date = #{incomeDate,jdbcType=DATE},
+      income_money = #{incomeMoney,jdbcType=DECIMAL},
+      income_status = #{incomeStatus,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
