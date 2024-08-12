@@ -9,12 +9,14 @@
         <module name="micr-web" />
         <module name="micr-api" />
         <module name="micr-dataservice" />
+        <module name="micr-common" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="micr-api" options="-parameters" />
+      <module name="micr-common" options="-parameters" />
       <module name="micr-dataservice" options="-parameters" />
       <module name="micr-parent" options="-parameters" />
       <module name="micr-web" options="-parameters" />
