@@ -22,6 +22,11 @@
         <!-- dependency of dubbo public project -->
         <dependency>
             <groupId>com.celan</groupId>
+            <artifactId>micr-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.celan</groupId>
             <artifactId>micr-api</artifactId>
             <version>1.0.0</version>
         </dependency>

@@ -26,15 +26,24 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from b_product_info
+    from b_loan_info
     where id = #{id,jdbcType=BIGINT}
   </select>
+    <select id="selectAvgRate" resultType="java.math.BigDecimal">
+      select round(avg(rate),2) as avgRate from b_loan_info
+    </select>
+  <select id="selectByTypeLimit" resultType="com.celan.api.model.ProductInfo">
+    select * from b_loan_info where product_type = #{ptype} order by rate desc limit #{offset} , #{rows}
+  </select>
+  <select id="selectCountByType" resultType="java.lang.Integer">
+    select count(id) as nums from b_loan_info where product_type = #{ptype}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from b_product_info
+    delete from b_loan_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.celan.api.model.ProductInfo">
-    insert into b_product_info (id, product_name, rate, 
+    insert into b_loan_info (id, product_name, rate,
       cycle, release_time, product_type, 
       product_no, product_money, left_product_money, 
       bid_min_limit, bit_max_limit, product_status, 
@@ -48,7 +57,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.celan.api.model.ProductInfo">
-    insert into b_product_info
+    insert into b_loan_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -145,7 +154,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.celan.api.model.ProductInfo">
-    update b_product_info
+    update b_loan_info
     <set>
       <if test="productName != null">
         product_name = #{productName,jdbcType=VARCHAR},
@@ -193,7 +202,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.celan.api.model.ProductInfo">
-    update b_product_info
+    update b_loan_info
     set product_name = #{productName,jdbcType=VARCHAR},
       rate = #{rate,jdbcType=DECIMAL},
       cycle = #{cycle,jdbcType=BIGINT},

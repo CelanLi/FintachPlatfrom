@@ -27,6 +27,13 @@
             <version>1.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.celan</groupId>
+            <artifactId>micr-common</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!--starter of dubbo-->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
@@ -66,6 +73,7 @@
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>swagger-bootstrap-ui</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>

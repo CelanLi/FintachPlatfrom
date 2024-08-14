@@ -19,6 +19,10 @@
     from u_user
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <!--注册的用户数量-->
+  <select id="selectCountUsers" resultType="java.lang.Integer">
+    select count(id) as ct from u_user
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from u_user
     where id = #{id,jdbcType=BIGINT}

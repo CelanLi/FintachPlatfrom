@@ -1,9 +1,10 @@
 package com.celan.api.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class IncomeRecord {
+public class IncomeRecord implements Serializable {
     private Long id;
 
     private Long uid;
