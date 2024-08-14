@@ -58,6 +58,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!--starter for redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <!--Swagger: since the web service is directly interact with frontend-->
         <dependency>
             <groupId>io.springfox</groupId>
