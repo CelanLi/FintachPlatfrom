@@ -22,6 +22,17 @@
     <select id="selectSumBidMoney" resultType="java.math.BigDecimal">
         select sum(bid_money) as sumBidMoney from b_bid_info
     </select>
+    <select id="selectByProductId" resultType="com.celan.api.pojo.BidInfoProduct">
+      select bid.id,
+             CONCAT( substring(u.phone from 1 for 3),'******',substring(u.phone from 10 for 2)) as phone,
+             date_format(bid.bid_time,'%Y-%m-%d %H:%i:%s') as bidTime,
+             bid.bid_money as bidMoney
+      from b_bid_info bid
+        join u_user u on bid.uid = u.id
+      where bid.loan_id = #{productId}
+      order by bid.bid_time desc
+        limit #{offset} , #{rows}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from b_bid_info
     where id = #{id,jdbcType=BIGINT}

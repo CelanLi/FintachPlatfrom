@@ -20,7 +20,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, product_name, rate, cycle, release_time, product_type, product_no, product_money, 
-    left_product_money, bid_min_limit, bit_max_limit, product_status, product_full_time, 
+    left_product_money, bid_min_limit, bid_max_limit, product_status, product_full_time,
     product_desc, version
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">

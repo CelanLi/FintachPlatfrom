@@ -9,6 +9,7 @@ public enum RCode {
     SUCCESS(1000, "请求成功"),
     PARAM_ERROR(1001, "请求参数有误"),
     PARAM_PRODUCT_TYPE_ERROR(1002, "产品类型参数有误"),
+    PRODUCT_OFFLINE(1003, "产品已下线"),
     SERVER_ERROR(2000, "服务器请求错误"),
     DUBBO_ERROR(3000, "访问dubbo的应答结果"),
     ;

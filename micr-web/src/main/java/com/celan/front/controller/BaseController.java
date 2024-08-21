@@ -1,5 +1,6 @@
 package com.celan.front.controller;
 
+import com.celan.api.service.InvestService;
 import com.celan.api.service.PlatBaseInfoService;
 import com.celan.api.service.ProductService;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -22,4 +23,8 @@ public class BaseController {
     /*产品服务*/
     @DubboReference(interfaceClass = ProductService.class, version = "1.0")
     protected ProductService productService;
+
+    /*投资服务*/
+    @DubboReference(interfaceClass = InvestService.class, version = "1.0")
+    protected InvestService investService;
 }

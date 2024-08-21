@@ -1,6 +1,7 @@
 package com.celan.front.controller;
 
 import com.celan.api.model.ProductInfo;
+import com.celan.api.pojo.BidInfoProduct;
 import com.celan.api.pojo.MultiProduct;
 import com.celan.commom.enums.RCode;
 import com.celan.commom.util.CommonUtil;
@@ -8,10 +9,7 @@ import com.celan.front.view.PageInfo;
 import com.celan.front.view.RespResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -56,6 +54,27 @@ public class ProductController extends BaseController{
         else {
             // 产品类型不存在
             result.setRCode(RCode.PARAM_PRODUCT_TYPE_ERROR);
+        }
+        return result;
+    }
+
+    /*查询某个产品的详情页面*/
+    @ApiOperation(value = "查询产品详情", notes = "根据产品id查询产品详情以及五条投资记录")
+    @GetMapping("/product/info")
+    public RespResult queryProductDetail(@RequestParam("productId") Integer id){
+        RespResult result = RespResult.fail();
+        if (id != null && id > 0) {
+            ProductInfo productInfo = productService.queryProductById(id);
+            if (productInfo != null) {
+                List<BidInfoProduct> bidInfoProducts = investService.queryBidListByProductId(id, 1, 5);
+                result = RespResult.ok();
+                result.setData(productInfo);
+                result.setList(bidInfoProducts);
+            }
+            else{
+                // 产品不存在
+                result.setRCode(RCode.PRODUCT_OFFLINE);
+            }
         }
         return result;
     }
