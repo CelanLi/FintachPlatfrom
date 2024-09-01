@@ -1,5 +1,7 @@
 package com.celan.commom.util;
 
+import java.util.regex.Pattern;
+
 public class CommonUtil {
 
     /*处理page number*/
@@ -27,5 +29,18 @@ public class CommonUtil {
             result = mobile.substring(0, 3) + "******" + mobile.substring(9,11);
         }
         return result;
+    }
+
+    /**
+     * check mobile
+     * @param mobile
+     * @return true if mobile is valid
+     */
+    public static boolean checkMobile(String mobile) {
+        boolean flag = false;
+        if (mobile != null && mobile.length() == 11) {
+            flag = Pattern.matches("^1[1-9]\\d{9}$", mobile);
+        }
+        return flag;
     }
 }

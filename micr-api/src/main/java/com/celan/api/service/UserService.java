@@ -3,6 +3,11 @@ package com.celan.api.service;
 import com.celan.api.model.User;
 
 public interface UserService {
-    /*根据手机号查询数据*/
     User queryByPhone(String phone);
+
+    int userRegister(String phone, String password);
+
+    User userLogin(String phone, String password);
+
+    int userUpdate(User user);
 }

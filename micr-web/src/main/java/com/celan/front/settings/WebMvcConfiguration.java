@@ -1,11 +1,27 @@
 package com.celan.front.settings;
 
+import com.celan.front.interceptor.TokenInterceptor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {
+
+    @Value("${jwt.secret-key")
+    private String jwtSecret;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        TokenInterceptor tokenInterceptor = new TokenInterceptor(jwtSecret);
+        // add token interceptor
+        String [] addPath = {"/v1/user/realname"};
+        registry.addInterceptor(tokenInterceptor)
+                .addPathPatterns(addPath); // add all paths
+    }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")  // 要处理的请求地址

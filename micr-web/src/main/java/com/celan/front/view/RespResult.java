@@ -10,22 +10,22 @@ import java.util.List;
 * */
 public class RespResult {
 
-    //应答码，自定义的数字
     private int code;
 
-    //应答消息，一般是错误消息，给用户看
     private String msg;
 
-    //应答数据，一般是查询结果
+
+    private String accessToken;
+
+    // object data
     private Object data;
 
-    //应答数据，存放集合数据
+    // list data
     private List list;
 
-    //分页数据
+    // information for paging
     private PageInfo page;
 
-    //表示成功的response result对象
     public static RespResult ok(){
         RespResult result = new RespResult();
         result.setRCode(RCode.SUCCESS);
@@ -33,7 +33,6 @@ public class RespResult {
         return result;
     }
 
-    //表示失败的response result对象
     public static RespResult fail(){
         RespResult result = new RespResult();
         result.setRCode(RCode.UNKNOWN);
@@ -84,5 +83,13 @@ public class RespResult {
 
     public void setPage(PageInfo page) {
         this.page = page;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 }

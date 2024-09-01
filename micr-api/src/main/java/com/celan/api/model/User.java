@@ -18,6 +18,10 @@ public class User implements Serializable {
 
     private String headerImage;
 
+    private String name;
+
+    private String idCard;
+
     public Long getId() {
         return id;
     }
@@ -72,5 +76,21 @@ public class User implements Serializable {
 
     public void setHeaderImage(String headerImage) {
         this.headerImage = headerImage;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 }

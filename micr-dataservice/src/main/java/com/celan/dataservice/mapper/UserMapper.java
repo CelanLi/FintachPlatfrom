@@ -1,9 +1,9 @@
 package com.celan.dataservice.mapper;
 
 import com.celan.api.model.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
-    //统计注册人数
     int selectCountUsers();
 
     int deleteByPrimaryKey(Long id);
@@ -17,4 +17,10 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    User selectByPhone(@Param("phone") String phone);
+
+    int insertReturnPrimaryKey(User record);
+
+    User selectLogin(@Param("phone") String phone, @Param("password") String password);
 }
