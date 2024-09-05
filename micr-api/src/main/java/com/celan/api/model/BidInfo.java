@@ -15,7 +15,7 @@ public class BidInfo implements Serializable {
 
     private Date bidTime;
 
-    private Long bidStatus;
+    private Integer bidStatus;
 
     public Long getId() {
         return id;
@@ -57,11 +57,11 @@ public class BidInfo implements Serializable {
         this.bidTime = bidTime;
     }
 
-    public Long getBidStatus() {
+    public Integer getBidStatus() {
         return bidStatus;
     }
 
-    public void setBidStatus(Long bidStatus) {
+    public void setBidStatus(Integer bidStatus) {
         this.bidStatus = bidStatus;
     }
 }

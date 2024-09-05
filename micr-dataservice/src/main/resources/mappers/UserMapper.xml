@@ -3,12 +3,24 @@
 <mapper namespace="com.celan.dataservice.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="com.celan.api.model.User">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="login_password" jdbcType="VARCHAR" property="loginPassword" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
     <result column="header_image" jdbcType="VARCHAR" property="headerImage" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <resultMap id="UserAccountInfoResultMap" type="com.celan.api.pojo.UserAccountInfo">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="login_password" jdbcType="VARCHAR" property="loginPassword" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="header_image" jdbcType="VARCHAR" property="headerImage" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="available_money" jdbcType="DECIMAL" property="availableMoney"/>
   </resultMap>
   <sql id="Base_Column_List">
     id, name, login_password, phone, add_time, last_login_time, header_image, id_card
@@ -33,67 +45,15 @@
       from u_user
       where phone = #{phone} and login_password = #{password}
     </select>
+    <select id="selectUserAccountById" resultMap="UserAccountInfoResultMap">
+      select u.*, a.available_money
+        from u_user u join u_finance_account a on u.id = a.uid
+        where u.id = #{uid}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from u_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.celan.api.model.User">
-    insert into u_user (id, email, login_password, 
-      phone, add_time, last_login_time, 
-      header_image)
-    values (#{id,jdbcType=BIGINT}, #{email,jdbcType=VARCHAR}, #{loginPassword,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
-      #{headerImage,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.celan.api.model.User">
-    insert into u_user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="email != null">
-        email,
-      </if>
-      <if test="loginPassword != null">
-        login_password,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="addTime != null">
-        add_time,
-      </if>
-      <if test="lastLoginTime != null">
-        last_login_time,
-      </if>
-      <if test="headerImage != null">
-        header_image,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="loginPassword != null">
-        #{loginPassword,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="addTime != null">
-        #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastLoginTime != null">
-        #{lastLoginTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="headerImage != null">
-        #{headerImage,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
   <insert id="insertReturnPrimaryKey">
     insert into u_user(phone, login_password, add_time)
     values(#{phone}, #{loginPassword}, #{addTime})
@@ -104,9 +64,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.celan.api.model.User">
     update u_user
     <set>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
       <if test="loginPassword != null">
         login_password = #{loginPassword,jdbcType=VARCHAR},
       </if>
@@ -133,7 +90,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.celan.api.model.User">
     update u_user
-    set email = #{email,jdbcType=VARCHAR},
+    set
       login_password = #{loginPassword,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       add_time = #{addTime,jdbcType=TIMESTAMP},

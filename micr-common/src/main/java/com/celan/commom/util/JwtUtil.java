@@ -14,16 +14,16 @@ import java.util.UUID;
 
 public class JwtUtil {
 
-    private String selfKey;
+    private SecretKey selfKey;
 
     public JwtUtil(String selfKey){
-        this.selfKey = selfKey;
+        byte[] bytes = selfKey.getBytes(StandardCharsets.UTF_8);
+        this.selfKey = Keys.hmacShaKeyFor(bytes);
     }
 
     public String createJwt(Map<String,Object> data, Integer minute) throws Exception{
         Date curDate = new Date();
-        SecretKey secreteKey = Keys.hmacShaKeyFor(selfKey.getBytes(StandardCharsets.UTF_8));
-        String jwt = Jwts.builder().signWith(secreteKey, SignatureAlgorithm.HS256)
+        String jwt = Jwts.builder().signWith(selfKey, SignatureAlgorithm.HS256)
                 .setExpiration(DateUtils.addMinutes(curDate, minute))
                 .setIssuedAt(curDate)
                 .setId(UUID.randomUUID().toString().replaceAll("-","").toUpperCase())
@@ -34,8 +34,7 @@ public class JwtUtil {
     }
 
     public Claims readJwt(String jwt) throws Exception{
-        SecretKey secreteKey = Keys.hmacShaKeyFor(selfKey.getBytes(StandardCharsets.UTF_8));
-        Claims body = Jwts.parserBuilder().setSigningKey(secreteKey).build().parseClaimsJws(jwt).getBody();
+        Claims body = Jwts.parserBuilder().setSigningKey(selfKey).build().parseClaimsJws(jwt).getBody();
         return body;
     }
 }

@@ -15,7 +15,15 @@
     from u_finance_account
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="selectByUidForUpdate" resultType="com.celan.api.model.FinanceAccount">
+      /*put lock on the row*/
+      select <include refid="Base_Column_List" />
+      from u_finance_account
+      where uid = #{uid}
+      for update  /*put lock, requires uid the unique index*/
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from u_finance_account
     where id = #{id,jdbcType=BIGINT}
   </delete>
@@ -67,5 +75,10 @@
     set uid = #{uid,jdbcType=BIGINT},
       available_money = #{availableMoney,jdbcType=DECIMAL}
     where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateAvailableMoneyByInvest">
+    update u_finance_account
+    set available_money = available_money - #{money}
+    where uid = #{uid} and (available_money - #{money} >= 0)
   </update>
 </mapper>

@@ -27,4 +27,9 @@ public interface ProductInfoMapper {
     int updateByPrimaryKey(ProductInfo record);
 
     Integer selectCountByType(@Param("ptype") Integer ptype);
+
+    int updateLeftProductMoney(@Param("id") Long id, @Param("money") BigDecimal money);
+
+
+    int updateSelled(@Param("productId") long id);
 }

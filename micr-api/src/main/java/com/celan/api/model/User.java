@@ -6,8 +6,6 @@ import java.util.Date;
 public class User implements Serializable {
     private Long id;
 
-    private String email;
-
     private String loginPassword;
 
     private String phone;
@@ -30,13 +28,6 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getLoginPassword() {
         return loginPassword;

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.Console;
 import java.io.PrintWriter;
 
 public class TokenInterceptor implements HandlerInterceptor {
@@ -42,34 +43,33 @@ public class TokenInterceptor implements HandlerInterceptor {
                 Claims claims = jwtUtil.readJwt(jwt);  // read the token
 
                 // get data from jwt
-                Integer uid = claims.get("id", Integer.class);
+                Integer uid = claims.get("uid", Integer.class);
                 if (headerUid.equals(String.valueOf(uid))){
                     // if header uid and jwt uid are the same, return true
                     requestSend = true;
                 }
             }
-
-            //token is not valid, give back false
-            if (requestSend == false){
-                // return json to frontend
-                RespResult result = RespResult.fail();
-                result.setRCode(RCode.TOKEN_INVALID);
-
-                // use HttpServletResponse give back json
-                // cannot convert to json automatically, since it is not controller
-                String respJson = JSONObject.toJSONString(result);
-                response.setContentType("application/json;charset=UTF-8");
-                PrintWriter writer = response.getWriter();
-                writer.print(respJson);
-                writer.flush();
-                writer.close();
-
-                return false;
-            }
         } catch (Exception e) {
             requestSend = false;
             e.printStackTrace();
         }
+        //token is not valid, give back false
+        if (requestSend == false){
+            // return json to frontend
+            RespResult result = RespResult.fail();
+            result.setRCode(RCode.TOKEN_INVALID);
+
+            // use HttpServletResponse give back json
+            // cannot convert to json automatically, since it is not controller
+            String respJson = JSONObject.toJSONString(result);
+            response.setContentType("application/json;charset=UTF-8");
+            PrintWriter writer = response.getWriter();
+            writer.print(respJson);
+            writer.flush();
+            writer.close();
+            return false;
+        }
+        System.out.println("token is:"+requestSend);
         return requestSend;
     }
 }

@@ -1,6 +1,7 @@
 package com.celan.front.controller;
 
 import com.celan.api.model.User;
+import com.celan.api.pojo.UserAccountInfo;
 import com.celan.commom.enums.RCode;
 import com.celan.commom.util.CommonUtil;
 import com.celan.commom.util.JwtUtil;
@@ -12,6 +13,7 @@ import com.celan.front.vo.RealnameVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -179,6 +181,38 @@ public class UserController extends BaseController{
         }
         else {
             result.setRCode(RCode.PHONE_FORMAT_ERROR);
+        }
+        System.out.println("realname check result:"+result.getMsg());
+        return result;
+    }
+
+    // user center
+    @GetMapping("/usercenter")
+    @ApiOperation(value = "用户中心", notes = "用户中心")
+    public RespResult userCenter(@RequestHeader(value = "uid", required = false)Integer uid){
+        RespResult result = RespResult.fail();
+        if (uid != null && uid > 0){
+            UserAccountInfo userAccountInfo = userService.queryUserAllInfo(uid);
+            if (userAccountInfo != null){
+                result = RespResult.ok();
+                // encapsulate data, to eliminate the sensitive data
+                Map<String, Object> data = new HashMap<>();
+                data.put("name", userAccountInfo.getName());
+                data.put("phone", userAccountInfo.getPhone());
+                data.put("headerImage", userAccountInfo.getHeaderImage());
+                data.put("money", userAccountInfo.getAvailableMoney());
+                if (userAccountInfo.getLastLoginTime() != null){
+                    data.put("lastLoginTime", DateFormatUtils.format(
+                            userAccountInfo.getLastLoginTime(), "yyyy-MM-dd HH:mm:ss"));
+                } else {
+                    data.put("lastLoginTime", "-");
+                }
+                result.setData(data);
+            } else {
+                result.setRCode(RCode.SERVER_ERROR);
+            }
+        } else {
+            result.setRCode(RCode.PARAM_ERROR);
         }
         return result;
     }

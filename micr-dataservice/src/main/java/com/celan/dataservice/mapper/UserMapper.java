@@ -1,6 +1,7 @@
 package com.celan.dataservice.mapper;
 
 import com.celan.api.model.User;
+import com.celan.api.pojo.UserAccountInfo;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -8,9 +9,6 @@ public interface UserMapper {
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(User record);
-
-    int insertSelective(User record);
 
     User selectByPrimaryKey(Long id);
 
@@ -23,4 +21,6 @@ public interface UserMapper {
     int insertReturnPrimaryKey(User record);
 
     User selectLogin(@Param("phone") String phone, @Param("password") String password);
+
+    UserAccountInfo selectUserAccountById(@Param("uid") Integer uid);
 }

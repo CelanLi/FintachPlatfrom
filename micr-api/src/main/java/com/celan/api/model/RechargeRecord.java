@@ -11,7 +11,7 @@ public class RechargeRecord implements Serializable {
 
     private String rechargeNo;
 
-    private Long rechargeStatus;
+    private Integer rechargeStatus;
 
     private BigDecimal rechargeMoney;
 
@@ -45,11 +45,11 @@ public class RechargeRecord implements Serializable {
         this.rechargeNo = rechargeNo;
     }
 
-    public Long getRechargeStatus() {
+    public Integer getRechargeStatus() {
         return rechargeStatus;
     }
 
-    public void setRechargeStatus(Long rechargeStatus) {
+    public void setRechargeStatus(Integer rechargeStatus) {
         this.rechargeStatus = rechargeStatus;
     }
 

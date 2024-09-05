@@ -12,4 +12,13 @@ public class YLBConstant {
     public static final Integer PRODUCT_TYPE_YOUXUAN_1 = 1;
     /*散标*/
     public static final Integer PRODUCT_TYPE_SANBIAO_2 = 2;
+
+    /*product status*/
+    public static final int PRODUCT_STATUS_SELLING = 0;
+    public static final int PRODUCT_STATUS_SELLED = 1;
+    public static final int PRODUCT_STATUS_PLAN = 2;
+
+    /*invest status*/
+    public static final int INVEST_STATUS_SUCCESS = 1;
+    public static final int INVEST_STATUS_FAIL = 2;
 }

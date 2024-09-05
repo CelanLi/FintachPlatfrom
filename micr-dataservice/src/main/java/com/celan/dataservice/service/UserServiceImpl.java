@@ -2,6 +2,7 @@ package com.celan.dataservice.service;
 
 import com.celan.api.model.FinanceAccount;
 import com.celan.api.model.User;
+import com.celan.api.pojo.UserAccountInfo;
 import com.celan.api.service.UserService;
 import com.celan.commom.util.CommonUtil;
 import com.celan.dataservice.mapper.FinanceAccountMapper;
@@ -94,5 +95,23 @@ public class UserServiceImpl implements UserService {
             return userMapper.updateByPrimaryKeySelective(user);
         }
         return 0;
+    }
+
+    @Override
+    public UserAccountInfo queryUserAllInfo(Integer uid) {
+        UserAccountInfo userAccountInfo = null;
+        if (uid!=null && uid >0){
+            userAccountInfo = userMapper.selectUserAccountById(uid);
+        }
+        return userAccountInfo;
+    }
+
+    @Override
+    public User queryById(Integer uid) {
+        User user = null;
+        if (uid != null && uid > 0) {
+            user = userMapper.selectByPrimaryKey(uid.longValue());
+        }
+        return user;
     }
 }

@@ -25,7 +25,7 @@ public class ProductInfo implements Serializable {
 
     private BigDecimal bidMinLimit;
 
-    private BigDecimal bitMaxLimit;
+    private BigDecimal bidMaxLimit;
 
     private Long productStatus;
 
@@ -115,12 +115,12 @@ public class ProductInfo implements Serializable {
         this.bidMinLimit = bidMinLimit;
     }
 
-    public BigDecimal getBitMaxLimit() {
-        return bitMaxLimit;
+    public BigDecimal getBidMaxLimit() {
+        return bidMaxLimit;
     }
 
-    public void setBitMaxLimit(BigDecimal bitMaxLimit) {
-        this.bitMaxLimit = bitMaxLimit;
+    public void setBidMaxLimit(BigDecimal bitMaxLimit) {
+        this.bidMaxLimit = bitMaxLimit;
     }
 
     public Long getProductStatus() {

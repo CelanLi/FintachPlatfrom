@@ -12,7 +12,7 @@
     <result column="product_money" jdbcType="DECIMAL" property="productMoney" />
     <result column="left_product_money" jdbcType="DECIMAL" property="leftProductMoney" />
     <result column="bid_min_limit" jdbcType="DECIMAL" property="bidMinLimit" />
-    <result column="bit_max_limit" jdbcType="DECIMAL" property="bitMaxLimit" />
+    <result column="bid_max_limit" jdbcType="DECIMAL" property="bidMaxLimit" />
     <result column="product_status" jdbcType="BIGINT" property="productStatus" />
     <result column="product_full_time" jdbcType="TIMESTAMP" property="productFullTime" />
     <result column="product_desc" jdbcType="VARCHAR" property="productDesc" />
@@ -218,5 +218,15 @@
       product_desc = #{productDesc,jdbcType=VARCHAR},
       version = #{version,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateLeftProductMoney">
+    update b_loan_info
+    set left_product_money = left_product_money - #{money}
+    where id = #{id} and (left_product_money - #{money} >= 0)
+  </update>
+  <update id="updateSelled">
+    update b_loan_info
+    set product_status = 1, product_full_time = now()
+    where id = #{productId}
   </update>
 </mapper>

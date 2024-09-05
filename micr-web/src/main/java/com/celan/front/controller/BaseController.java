@@ -1,9 +1,6 @@
 package com.celan.front.controller;
 
-import com.celan.api.service.InvestService;
-import com.celan.api.service.PlatBaseInfoService;
-import com.celan.api.service.ProductService;
-import com.celan.api.service.UserService;
+import com.celan.api.service.*;
 import com.celan.front.service.SmsService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -34,6 +31,8 @@ public class BaseController {
     @DubboReference(interfaceClass = UserService.class, version = "1.0")
     protected UserService userService;
 
+    @DubboReference(interfaceClass = RechargeService.class, version = "1.0")
+    protected RechargeService rechargeService;
 
 
 }
